@@ -51,6 +51,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /** Alternative button */
+    public void alternativeActionMethod(View view) {
+        // We’ll think about this
+        Intent intent = new Intent(this, ImageActivity.class);
+        EditText editText = (EditText) findViewById(R.id.edit_message);
+        String message = editText.getText().toString();
+        System.out.println("Trying to send message " + message );
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+
     /** Called when the user clicks the Send button */
     public void sendMessage(View view) {
         // Do something in response to button

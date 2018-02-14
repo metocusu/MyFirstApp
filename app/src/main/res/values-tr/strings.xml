@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Kuzu</string>
-    <string name="hello_world">Merhaba!</string>
-    <string name="action_settings">Ayarlar</string>
-    <string name="main_button_string">Buraya bas!</string>
-    <string name="edit_message">Yardım.</string>
-    <string name="action_search">Arama.</string>
-    <string name="title_activity_display_message">Mesajım</string>
-
+    <string name="click_here">Buraya tıkla</string>
+    <string name="checkbox">Seçme kutusu</string>
+    <string name="hi_there">Merhaba</string>
+    <string name="title_activity_image">ResimliAktivite</string>
+    <string name="funtime">Eğlence</string>
+    <string name="click_here2">Buraya tıkla lütfen</string>
 </resources>
