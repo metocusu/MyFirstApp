@@ -1,24 +1,31 @@
 package tr.edu.ku.mtsezgin.myfirstapp;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.mycompany.myfirstapp.MESSAGE";
 
-
+    EditText editText;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        editText = (EditText) findViewById(R.id.edit_message);
+        textView = (TextView) findViewById(R.id.textView);
     }
 
 
@@ -60,5 +67,20 @@ public class MainActivity extends ActionBarActivity {
         System.out.println("Trying to send message " + message );
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+    }
+
+    /** Called when the user clicks either Save or Load buttons */
+    public void onClick(View view){
+        int id = view.getId();
+        if(id == R.id.button_save){
+            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(getString(R.string.saved_name), editText.getText().toString());
+            editor.commit();
+        }else if(id == R.id.button_load){
+            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+            String loadedName = sharedPref.getString(getString(R.string.saved_name), "default");
+            textView.setText(loadedName);
+        }
     }
 }

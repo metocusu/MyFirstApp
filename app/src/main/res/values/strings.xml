@@ -9,4 +9,9 @@
     <string name="action_search">Start searching.</string>
     <string name="title_activity_display_message">My Message</string>
 
+    <string name="save_button_string">SAVE</string>
+    <string name="load_button_string">LOAD</string>
+    <string name="no_recent_loads">No recent loads</string>
+    <string name="saved_name">saved_name</string>
+
 </resources>
