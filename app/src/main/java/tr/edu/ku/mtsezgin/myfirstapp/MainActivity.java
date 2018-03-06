@@ -1,6 +1,7 @@
 package tr.edu.ku.mtsezgin.myfirstapp;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,6 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.v("MainActivity", "onCreate");
     }
 
 
@@ -66,12 +71,29 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when the user clicks the Send button */
     public void sendMessage(View view) {
+        // Write a message to the database
+
         // Do something in response to button
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
         String message = editText.getText().toString();
         System.out.println("Trying to send message " + message );
         intent.putExtra(EXTRA_MESSAGE, message);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+        myRef.setValue(message);
+        Log.d("MainActivity", "Sent database request.");
+
+        Point  p        = new Point( (int) (Math.random()*10),
+                                     (int) (Math.random()*10) );
+        // String p_id = myRef.push().getKey();
+        String p_id = String.valueOf( p.hashCode() );
+        myRef = database.getReference( p_id );
+        myRef.child( p_id ).setValue(p);
+
+
+
         startActivity(intent);
     }
 }
